@@ -19,6 +19,8 @@ A aplicação utiliza as seguintes variáveis de ambiente:
 - `DB_USER` - O nome do usuário que irá se conectar ao banco.
 - `DB_PASS` - A senha do usuário citado acima.
 
+> **Observação:** Para os exemplos abaixo, o endereço IP do banco foi considerado como 172.17.0.2.
+
 ### Virtualenv
 
 Se possuir python em sua máquina, é possível utilizar o pip diretamente:
@@ -29,7 +31,7 @@ cd containers-apps/python
 python3 -m venv venv
 . venv/bin/activate
 pip3 install -r requirements.txt
-flask run
+DB_HOST=172.17.0.2 DB_USER=container DB_PASS=4linux DB_NAME=container flask run
 ```
 
 ### Docker
@@ -42,5 +44,5 @@ cd containers-apps/python
 docker container run -dti --name flask -v $PWD:/opt/app -p 5000:5000 alpine sh
 apk add py3-pip
 pip3 install -r requirements.txt
-flask run --host 0.0.0.0
+DB_HOST=172.17.0.2 DB_USER=container DB_PASS=4linux DB_NAME=container flask run --host 0.0.0.0
 ```
