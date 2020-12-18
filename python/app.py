@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
 import pymysql
-from db import get_db
+from db import get_db, close_db
 from faker import Faker
 from flask import Flask, render_template
 
 faker = Faker()
 
 app = Flask(__name__)
+app.teardown_appcontext(close_db) # chama close_db a cada fim de execução
 
 @app.route('/')
 def home():

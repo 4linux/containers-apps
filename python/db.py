@@ -3,7 +3,7 @@
 import pymysql
 
 from os import environ as env
-from flask import current_app, g
+from flask import g
 
 def get_db():
     '''Obtém a conexão com o banco.
@@ -23,12 +23,8 @@ def get_db():
         )
     return g.db
 
-def close_db():
+def close_db(exception=None):
     '''Remove db da variável g e fecha a conexão'''
     db = g.pop('db')
     if db:
         db.close()
-
-def init_app(current_app):
-    '''Fecha a conexão com o banco a cada fim de requisição'''
-    app.teardown_appcontext(close_db)
