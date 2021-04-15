@@ -25,6 +25,6 @@ def get_db():
 
 def close_db(exception=None):
     '''Remove db da variável g e fecha a conexão'''
-    db = g.pop('db')
+    db = g.pop('db', None)
     if db:
         db.close()
